@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SpotifyNowPlaying</title>
+    <style type="text/css">
+        @font-face {
+            font-family: 'Open Sans';
+            font-style: normal;
+            font-weight: 400;
+            src: local('Open Sans Regular'), local('OpenSans-Regular'), url($font_file) format('truetype');
+        }
+
+        body {
+            color: white;
+            font-family: "Open Sans", sans-serif;
+            white-space: nowrap;
+        }
+
+        #time, #name {
+            font-size: 36px;
+        }
+
+        #artist {
+            font-size: 24px;
+        }
+
+        #album {
+            font-size: 14px;
+        }
+
+        tr {
+            vertical-align: top;
+            text-align: left;
+        }
+
+        img#artwork_img {
+            height: 140px;
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+<table border="0" cellpadding="4" cellspacing="0">
+    <tr>
+        <td>
+            <img id="artwork_img" src="$artwork_uri"/>
+        </td>
+        <td>
+            <span id="name">$name<br/></span>
+            <span id="artist">$artist<br/></span>
+            <span id="album">$album<br/></span>
+            <span id="time">$player_position/$duration<br/></span>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

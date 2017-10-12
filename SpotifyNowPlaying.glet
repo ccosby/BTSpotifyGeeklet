@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>DisplayID</key>
+	<integer>2026511685</integer>
+	<key>GeekletFrame</key>
+	<string>{{340, 36}, {600, 230}}</string>
+	<key>HasShadow</key>
+	<false/>
+	<key>Identifier</key>
+	<string>org.tynsoe.geeklet.web</string>
+	<key>Interpreter</key>
+	<string>/bin/sh</string>
+	<key>Name</key>
+	<string>SpotifyNowPlaying</string>
+	<key>Opacity</key>
+	<real>10000</real>
+	<key>RefreshInterval</key>
+	<integer>1</integer>
+	<key>RelativePosition</key>
+	<integer>1</integer>
+	<key>Script</key>
+	<string>/usr/bin/python ~/Documents/Geektool/BTSpotifyGeeklet/update.py</string>
+	<key>WebGeekletType</key>
+	<integer>1</integer>
+	<key>Zoom</key>
+	<real>1</real>
+</dict>
+</plist>
