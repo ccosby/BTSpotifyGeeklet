@@ -3,10 +3,9 @@
 function run(argv) {
     var Spotify = Application("Spotify");
 
-    var data = {};
+    var data = { running: false };
 
     if (!Spotify.running()) {
-        data.running = false;
         return JSON.stringify(data);
     }
 
@@ -21,6 +20,7 @@ function run(argv) {
         data.artwork_url = track.artworkUrl();
         data.player_position = Spotify.playerPosition();
         data.duration = track.duration();
-        return JSON.stringify(data, null, '\t');
     }
+
+    return JSON.stringify(data);
 }

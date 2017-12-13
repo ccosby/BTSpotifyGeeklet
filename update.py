@@ -1,3 +1,4 @@
+import fcntl
 import hashlib
 import json
 import math
@@ -17,6 +18,7 @@ HTML_TEMPLATE = os.path.join(TOP_DIR, 'template.html')
 FONT_FILE = os.path.join(CACHE_DIR, 'Open_Sans.ttf')
 FONT_URL = 'https://fonts.gstatic.com/s/opensans/v15/cJZKeOuBrn4kERxqtaUH3aCWcynf_cDxXwCLxiixG1c.ttf'
 FONT_SUM = '92d652578c531e2c3d9db4622584f6a1ab2c225a'
+LOCKFILE_FILE = os.path.join(CACHE_DIR, 'run.lock')
 
 
 def get_html_template():
@@ -98,6 +100,16 @@ def format_time(time_int):
 
 
 def main():
+    try:
+        lockfp = open(LOCKFILE_FILE, 'w+')
+        fcntl.flock(lockfp, fcntl.LOCK_EX | fcntl.LOCK_NB)
+    except IOError as e:
+        import errno
+        if e.errno != errno.EAGAIN:
+            raise
+        else:
+            return ""
+
     dat = get_spotify_now_playing()
 
     if not dat['running']:
@@ -115,11 +127,14 @@ def main():
     get_font_file()
 
     template = get_html_template()
-    return Template(template).safe_substitute(
+    r = Template(template).safe_substitute(
         artwork_uri=artwork_uri,
         font_file='font://' + FONT_FILE,
         **dat
     )
+
+    fcntl.flock(lockfp, fcntl.LOCK_UN)
+    return r.encode('utf-8')
 
 
 def timing():
@@ -129,4 +144,4 @@ def timing():
 
 
 if __name__ == '__main__':
-    print main().encode('utf-8')
+    print main()
